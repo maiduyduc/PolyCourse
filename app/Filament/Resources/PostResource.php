@@ -49,7 +49,7 @@ class PostResource extends Resource
                             ->label('Tiêu đề')
                             ->required()
                             ->reactive()
-                            ->afterStateUpdated(fn (string|null $state, callable $set) => $set('slug', Str::slug($state))),
+                            ->afterStateUpdated(fn (?string $state, callable $set) => $set('slug', Str::slug($state))),
 
                         TextInput::make('slug')
                             ->required()

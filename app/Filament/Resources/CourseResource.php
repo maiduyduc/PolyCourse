@@ -43,7 +43,7 @@ class CourseResource extends Resource
                                         ->label('Tên')
                                         ->required()
                                         ->reactive()
-                                        ->afterStateUpdated(fn (string|null $state, callable $set) => $set('slug', Str::slug($state))),
+                                        ->afterStateUpdated(fn (?string $state, callable $set) => $set('slug', Str::slug($state))),
 
                                     Forms\Components\TextInput::make('slug')
                                         ->required()

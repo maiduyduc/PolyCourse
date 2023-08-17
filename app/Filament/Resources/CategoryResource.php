@@ -33,37 +33,37 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 Card::make()
-                ->schema([
-                    TextInput::make('name')
-                        ->label('Tên')
-                        ->required()
-                        ->reactive()
-                        ->afterStateUpdated(fn (string $state, callable $set) => $set('slug', Str::slug($state))),
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Tên')
+                            ->required()
+                            ->reactive()
+                            ->afterStateUpdated(fn (string $state, callable $set) => $set('slug', Str::slug($state))),
 
-                    TextInput::make('slug')
-                        ->disabled()
-                        ->required()
-                        ->unique(ignoreRecord: true),
+                        TextInput::make('slug')
+                            ->disabled()
+                            ->required()
+                            ->unique(ignoreRecord: true),
 
-                    MarkdownEditor::make('description')
-                        ->label('Mô tả')
-                        ->columnSpan('full'),
+                        MarkdownEditor::make('description')
+                            ->label('Mô tả')
+                            ->columnSpan('full'),
 
-                    SpatieMediaLibraryFileUpload::make('image')
-                        ->label('Hình ảnh')
-                        ->columnSpan('full'),
+                        SpatieMediaLibraryFileUpload::make('image')
+                            ->label('Hình ảnh')
+                            ->columnSpan('full'),
 
-                    Placeholder::make('created_at')
-                        ->label('Tạo lúc')
-                        ->hiddenOn('create')
-                        ->content(fn (?Category $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                        Placeholder::make('created_at')
+                            ->label('Tạo lúc')
+                            ->hiddenOn('create')
+                            ->content(fn (?Category $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
-                    Placeholder::make('updated_at')
-                        ->label('Cập nhật lúc')
-                        ->hiddenOn('create')
-                        ->content(fn (?Category $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
-                ])
-                ->columns(),
+                        Placeholder::make('updated_at')
+                            ->label('Cập nhật lúc')
+                            ->hiddenOn('create')
+                            ->content(fn (?Category $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ])
+                    ->columns(),
             ]);
     }
 

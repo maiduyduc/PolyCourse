@@ -13,7 +13,7 @@ class LessonSeeder extends Seeder
      */
     public function run(): void
     {
-//        Lesson::truncate();
+        //        Lesson::truncate();
 
         $coursesCount = Course::count();
 
