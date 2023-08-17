@@ -9,6 +9,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -30,15 +31,29 @@ class UserResource extends Resource
 
                         Forms\Components\TextInput::make('username')
                             ->label('Tên đăng nhập')
+                            ->unique()
                             ->required(),
 
                         Forms\Components\TextInput::make('email')
                             ->label('Email')
+                            ->unique()
                             ->required(),
 
                         Forms\Components\TextInput::make('phone')
                             ->label('Số điện thoại')
+                            ->unique()
                             ->required(),
+
+                        Forms\Components\TextInput::make('password')
+                            ->label('Mật khẩu')
+                            ->required()
+                            ->minLength(6)
+                            ->password()
+                            ->dehydrateStateUsing(fn (string $state) => Hash::make($state)),
+
+                        Forms\Components\TextInput::make('password_confirmation')
+                            ->label('Nhập lại mật khẩu')
+                            ->password(),
 
                         Forms\Components\Textarea::make('bio')
                             ->label('Giới thiệu')
@@ -82,13 +97,6 @@ class UserResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

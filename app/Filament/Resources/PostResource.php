@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
-use App\Models\Category;
 use App\Models\Post;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\MarkdownEditor;
@@ -36,12 +35,14 @@ class PostResource extends Resource
                             ->label('Nguời đăng')
                             ->required()
                             ->relationship('author', 'name')
+                            ->preload()
                             ->searchable(),
 
                         Select::make('category_id')
                             ->label('Danh mục')
                             ->required()
                             ->relationship('category', 'name')
+                            ->preload()
                             ->searchable(),
 
                         TextInput::make('title')
